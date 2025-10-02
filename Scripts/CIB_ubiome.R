@@ -220,33 +220,21 @@ taxa_abundance_table_phylum %>%
 # taxa_names(physeq) <- paste0("ASV", seq(ntaxa(physeq)))
 # physeq
 
-#Calculate Jensen-Shannon Divergence distance
-#jsd_dist <- distance(physeq, method = "jsd")
-
-distance(physeq, method = "jsd")
-distance(physeq, method = "bray")
-distance(physeq, method = "jaccard")
-distance(physeq, method = "unifrac")
+#Calculate Bray-Curtis distance
+bray_dist <- distance(physeq, method = "bray")
 
 #save as matrix
-jsd_dist_mat <- as.matrix(jsd_dist)
+bray_dist_mat <- as.matrix(bray_dist)
 
-#Perform ordination (PCoA)
-jsd_pcoa <- ordinate(physeq, method = "PCoA", distance = jsd_dist)
+#subtract dissimilarity values by 1 to get similarity
+bray_sim_mat <- 1-bray_dist_mat
 
-#Plot the ordination results, color samples by variable
-#Location
-plot_ordination(physeq, jsd_pcoa, color = "Location")
+#remove exponential notation to get fixed decimal format
+bray_sim_mat <- format(bray_sim_mat, scientific = FALSE)
 
-#Age Class
-plot_ordination(physeq, jsd_pcoa, color = "AgeClass")
 
-#Sex
-plot_ordination(physeq, jsd_pcoa, color = "sex")
-
-#Year
-plot_ordination(physeq, jsd_pcoa, color = "year")
-
+#save microbial similarity results
+write.csv(bray_sim_mat, "C:/Users/arial/Desktop/Ch.3 Microbiome & popgen/CIB-ubiome-popgen/ubiome_sim.csv")
 
 
 
