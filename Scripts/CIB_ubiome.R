@@ -234,7 +234,7 @@ bray_sim_mat <- format(bray_sim_mat, scientific = FALSE)
 
 
 #save microbial similarity results
-write.csv(bray_sim_mat, "C:/Users/arial/Desktop/Ch.3 Microbiome & popgen/CIB-ubiome-popgen/ubiome_sim.csv")
+write.csv(bray_sim_mat, "C:/Users/arial/Desktop/Ch.3 Microbiome & popgen/CIB-ubiome-popgen/ubiome_matrix.csv")
 
 
 
